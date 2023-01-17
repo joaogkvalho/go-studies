@@ -1,13 +1,12 @@
-package main
+package findtitle
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	"regexp"
 )
 
-func titulo(urls ...string) <-chan string {
+func Titulo(urls ...string) <-chan string {
 	c := make(chan string)
 	for _, url := range urls {
 		go func(url string) {
@@ -20,12 +19,4 @@ func titulo(urls ...string) <-chan string {
 	}
 
 	return c
-}
-
-func main() {
-	t1 := titulo("https://www.cod3r.com.br", "https://www.google.com")
-	t2 := titulo("https://github.com", "https://youtube.com")
-
-	fmt.Println("Primeiros:", <-t1, "|", <-t2)
-	fmt.Println("Segundos:", <-t1, "|", <-t2)
 }
